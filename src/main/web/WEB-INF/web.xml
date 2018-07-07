@@ -6,6 +6,37 @@
 
     <display-name>FrameworksLessons</display-name>
 
-    
+    <!-- TODO -->
+
+    <!--<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/springСonfig.xml</param-value>
+    </context-param>-->
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <!-- TODO -->
+
+        <!--<init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/springConfig.xml</param-value>
+        </init-param>-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- Need? -->
+
+    <!--<welcome-file-list>
+        <welcome-file>/WEB-INF/pages/index.jsp</welcome-file>
+    </welcome-file-list>-->
 
 </web-app>
