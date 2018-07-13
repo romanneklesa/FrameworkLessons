@@ -40,13 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         // Говорим что все запросы должны пройти аунтификацию (не путать с авторизацией)
-        http.csrf().disable().authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/", "/login", "/resources/**").permitAll() // Все страницы и ресурсы доступны всем
                 .antMatchers("/panel/**", "/api/**").access("hasRole('ADMIN')"); // Страницы и api запросы доступны только админу
 
         // Говорим что страница авторизации всем доступна
         http.formLogin()
-//                .loginPage("/login")
+                .loginPage("/login")
                 .permitAll(true);
 
         // Задаём параметры для выхода и что при этом нужно сделать

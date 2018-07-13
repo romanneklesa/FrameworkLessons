@@ -13,6 +13,7 @@
     </head>
     <body>
         <form method="POST" action="<c:url value="/login"/>">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input name="username" type="text">
             <input name="password" type="password">
             <button type="submit">Login</button>
