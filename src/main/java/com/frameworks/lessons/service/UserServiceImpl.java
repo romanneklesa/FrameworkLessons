@@ -1,6 +1,6 @@
 package com.frameworks.lessons.service;
 
-import com.frameworks.lessons.dao.UserDaoImpl;
+import com.frameworks.lessons.dao.impl.UserDaoImpl;
 import com.frameworks.lessons.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

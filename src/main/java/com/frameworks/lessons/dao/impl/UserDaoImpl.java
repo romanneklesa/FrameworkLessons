@@ -1,5 +1,6 @@
-package com.frameworks.lessons.dao;
+package com.frameworks.lessons.dao.impl;
 
+import com.frameworks.lessons.dao.UserDao;
 import com.frameworks.lessons.entity.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

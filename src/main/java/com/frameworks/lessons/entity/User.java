@@ -13,5 +13,4 @@ public class User {
 
     @Column(name = "email", unique = true, updatable = false)
     private String email;
-
 }
