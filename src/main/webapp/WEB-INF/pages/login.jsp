@@ -10,13 +10,19 @@
 <html>
     <head>
         <title>Login</title>
+               <link href="<c:url value="/resources/css/signup.css" />" rel="stylesheet">
+               <script src="<c:url value="/resources/js/signup.js" />"></script>
     </head>
-    <body>
+<body>
+
         <form method="POST" action="<c:url value="/login"/>">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input name="username" type="text">
             <input name="password" type="password">
             <button type="submit">Login</button>
         </form>
+
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+        <%@ include file="signup.jsp" %>
     </body>
 </html>
