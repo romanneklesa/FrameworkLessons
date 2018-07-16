@@ -10,11 +10,30 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int account_id;
 
-    @Column(name = "account", unique = true)
+    @Column(name = "account")
     private String account;
 
     @Column(name = "amount")
     private int amount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private User user;
+
+    @Override
+    public String toString() {
+        return "account_id=" + account_id +
+                ", account='" + account +
+                ", amount=" + amount;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getAccount_id() {
         return account_id;
