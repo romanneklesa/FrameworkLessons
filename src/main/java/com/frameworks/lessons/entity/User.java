@@ -17,6 +17,9 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "amount")
+    private int amount;
+
     @Column(name = "password", unique = true)
     private String password;
 
@@ -50,6 +53,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAmount(){
+        return amount;
+    }
+
+    public void setAmount(int amount){
+        this.amount = amount;
     }
 
     public String getPassword() {
