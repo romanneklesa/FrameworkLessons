@@ -23,6 +23,6 @@
         </form>
 
         <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
-        <%@ include file="signup.jsp" %>
+        <%@ include file="../tpl/signup.jsp" %>
     </body>
 </html>

@@ -13,7 +13,8 @@ import java.util.List;
 
 @Repository
 public class AccountDaoImpl implements AccountDao {
-    private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(AccountDaoImpl.class);
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -27,7 +28,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account getAccount(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Account account = (Account) session.load(Account.class, new Integer(id));
+        Account account = (Account) session.load(Account.class, id);
         logger.info("Account loaded successfully, Account details = " + account);
         return account;
     }
@@ -35,7 +36,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public void deleteAccount(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Account account = (Account) session.load(Account.class, new Integer(id));
+        Account account = (Account) session.load(Account.class, id);
         if (account != null) {
             session.delete(account);
         }

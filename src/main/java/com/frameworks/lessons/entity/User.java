@@ -1,6 +1,7 @@
 package com.frameworks.lessons.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -17,9 +18,6 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "amount")
-    private int amount;
-
     @Column(name = "password", unique = true)
     private String password;
 
@@ -27,14 +25,13 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @Override
-    public String toString(){
-        return "id="+id+", name="+name;
-    }
+    @OneToMany(mappedBy="account", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Account> accounts;
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -71,4 +68,23 @@ public class User {
         this.role = role;
     }
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", accounts=" + accounts +
+                '}';
+    }
 }

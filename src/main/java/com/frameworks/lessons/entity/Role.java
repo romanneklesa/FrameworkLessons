@@ -5,20 +5,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "role")
 public class Role {
+
     @Id
-    @Column(name = "role_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int role_id;
+    private int id;
 
     @Column(name = "role", unique = true)
     private String role;
 
-    public int getRole_id() {
-        return role_id;
+
+    public int getId() {
+        return id;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRole() {
@@ -27,5 +29,13 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

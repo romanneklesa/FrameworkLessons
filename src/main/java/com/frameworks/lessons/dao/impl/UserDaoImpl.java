@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUser(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        User user = (User) session.load(User.class, new Integer(id));
+        User user = (User) session.load(User.class, id);
         logger.info("User loaded successfully, User details="+user);
         return user;
     }
@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(int id) {
         Session session = sessionFactory.getCurrentSession();
-        User user = (User) session.load(User.class, new Integer(id));
+        User user = (User) session.load(User.class, id);
         if(null != user){
             session.delete(user);
         }
