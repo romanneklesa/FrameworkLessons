@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Repository
@@ -28,7 +30,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUser(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        User user = (User) session.load(User.class, id);
+        User user = (User) session.load(User.class, new Integer(id));
         logger.info("User loaded successfully, User details="+user);
         return user;
     }
@@ -36,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(int id) {
         Session session = sessionFactory.getCurrentSession();
-        User user = (User) session.load(User.class, id);
+        User user = (User) session.load(User.class, new Integer(id));
         if(null != user){
             session.delete(user);
         }
@@ -59,5 +61,36 @@ public class UserDaoImpl implements UserDao {
         }
         return userList;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public User findByName(String name) {
+        List<User> users = new ArrayList<User>();
+
+        users = sessionFactory.getCurrentSession()
+                .createQuery("from User where name=?")
+                .setParameter(0, name)
+                .list();
+
+        if (users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
+
+
 
 }
