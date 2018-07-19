@@ -13,19 +13,7 @@ public class Role {
     @Column(name = "role", unique = true)
     private String role;
 
-    @ManyToOne()
-   // @JoinColumn(name = "name", nullable = false)
-    private User user;
 
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public int getRole_id() {
         return role_id;
@@ -48,7 +36,6 @@ public class Role {
         return "Role{" +
                 "role_id=" + role_id +
                 ", role='" + role + '\'' +
-                ", user=" + user +
                 '}';
     }
 }

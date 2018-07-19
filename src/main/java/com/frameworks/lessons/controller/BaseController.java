@@ -1,5 +1,6 @@
 package com.frameworks.lessons.controller;
 
+import com.frameworks.lessons.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +28,8 @@ public class BaseController {
 
     @GetMapping(value = "/login")
     private ModelAndView login(ModelAndView view) {
+        User user = new User();
+        view.getModelMap().addAttribute(user);
         view.addObject("title", "Login page");
         view.setViewName("login");
         return view;

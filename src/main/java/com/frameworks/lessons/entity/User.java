@@ -1,9 +1,6 @@
 package com.frameworks.lessons.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,7 +8,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -21,25 +18,16 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "amount")
-    private int amount;
-
-    @Column(name = "password", unique = true)
+    @Column(name = "password")
     private String password;
 
-    @OneToMany()
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "role_id"))
-    private List<Role> role = new ArrayList<Role>(0);
+    /*@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;*/
 
-
-    @Column(name = "enabled", nullable = false)
-    private boolean enabled;
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Role.class)
+    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private Set<Role> roles;
 
     @Override
     public String toString(){
@@ -77,20 +65,19 @@ public class User {
         this.password = password;
     }
 
+    /*  public Role getRole() {
+          return role;
+      }
 
-    public List<Role> getRole() {
-        return role;
+      public void setRole(Role role) {
+          this.role = role;
+      }*/
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
-
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setRole(Set<Role> roles) {
+        this.roles = roles;
     }
 
 }
