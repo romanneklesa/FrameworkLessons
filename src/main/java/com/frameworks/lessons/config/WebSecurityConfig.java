@@ -38,10 +38,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .failureUrl("/login?error")
 
-        http.authorizeRequests().antMatchers("/admin/**")
-                .access("hasRole('ROLE_ADMIN')").and().formLogin()
-                .loginPage("/login").failureUrl("/login?error")
+                .permitAll()
+
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/login?logout")

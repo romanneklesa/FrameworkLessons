@@ -242,7 +242,7 @@
                 <version>9.2.11.v20150529</version>
                 <configuration>
                     <httpConnector>
-                        <port>8887</port>
+                        <port>8888</port>
                     </httpConnector>
                 </configuration>
             </plugin>
