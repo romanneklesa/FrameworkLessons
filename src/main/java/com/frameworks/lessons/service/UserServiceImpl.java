@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+// This class should be deleted. Full implemetation is in 'com.frameworks.lessons.service.impl' package
 //@Service
 public class UserServiceImpl /*implements UserService*/ {
 
