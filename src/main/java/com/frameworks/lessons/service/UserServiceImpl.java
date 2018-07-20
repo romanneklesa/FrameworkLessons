@@ -8,20 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
-public class UserServiceImpl implements UserService {
+//@Service
+public class UserServiceImpl /*implements UserService*/ {
 
     @Autowired
     private UserDaoImpl userDao;
 
     @Transactional
-    @Override
+    //@Override
     public void add(User user) {
         userDao.add(user);
     }
 
     @Transactional(readOnly = true)
-    @Override
+    //@Override
     public List<User> listUsers() {
         return userDao.listUsers();
     }
