@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -70,25 +71,17 @@ public class UserDaoImpl implements UserDao {
 
 
 
-
-
-
-
-
     @Override
     public User findByName(String name) {
-        List<User> users = new ArrayList<User>();
+        try {
+            return (User) sessionFactory.getCurrentSession()
+                    .createQuery("from User where name=?1")
+                    .setParameter(1, name).getSingleResult();
 
-        users = sessionFactory.getCurrentSession()
-                .createQuery("from User where name=?")
-                .setParameter(0, name)
-                .list();
-
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
+        } catch (NoResultException e) {
             return null;
         }
+
     }
 
 
