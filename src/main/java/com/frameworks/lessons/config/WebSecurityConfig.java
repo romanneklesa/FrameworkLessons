@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Временный пользователя который находятся в памяти. Позже будет привязка к БД
 
         //auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("user")).roles("USER");
-        // auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin")).roles("ROLE_ADMIN");
+         auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
 
     }
 
@@ -46,9 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error")
-
                 .permitAll()
-
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/login?logout")
