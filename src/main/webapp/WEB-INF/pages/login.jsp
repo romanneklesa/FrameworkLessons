@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Авторизация</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
-        <link href="/resources/css/style.css" type="text/css" rel="stylesheet"/>
+        <link href="./resources/css/style.css" type="text/css" rel="stylesheet"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
@@ -22,7 +22,7 @@
             <div class="header col-lg-10 col-lg-offset-1">
                 <div class="col-lg-6 col-lg-offset-3">
                     <div class="col-lg-12 col-lg-offset-3">
-                            <img src="/resources/registration.png" class="col-lg-6" alt="Cinque Terre">
+                            <img src="./resources/registration.png" class="col-lg-6" alt="Cinque Terre">
                     </div>
                     <c:url value="/j_spring_security_check" var="loginUrl" />
                     <form class="form-horizontal" action="${loginUrl}" method="POST">
@@ -46,5 +46,5 @@
             </div>
         </div>
     </body>
-            <script src="/resources/js/loginValidation.js"></script>
+            <script src="./resources/js/loginValidation.js"></script>
 </html>
