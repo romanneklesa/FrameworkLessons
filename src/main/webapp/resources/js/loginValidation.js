@@ -8,7 +8,7 @@ var isPasswordSuccess = false;
 
 $( "#user" ).keydown(function() {
     isLoginSuccess = false;
-    if($( "#user" ).val().length > 12 || $( "#user" ).val().length<5){
+    if($( "#user" ).val().length > 12 || $( "#user" ).val().length<4){
         $('#errorLoginDescription').html("<p class='errorDescription'> Логин должен быть в пределах : 5 - 12 симв. !</p>");
         $("#send_button").attr('disabled',true);
     }
@@ -25,13 +25,13 @@ $( "#user" ).keydown(function() {
     }
 });
 $( "#user" ).focusout(function() {
-        if(( $( "#user" ).val().length <= 12 && $( "#user" ).val().length>=5 ) || $( "#user" ).val().length === 0 ){
+        if(( $( "#user" ).val().length <= 12 && $( "#user" ).val().length>=4 ) || $( "#user" ).val().length === 0 ){
              $('#errorLoginDescription').html("");
         } 
 });
 $( "#pwd" ).keydown(function() {
     isPasswordSuccess = false;
-    if($( "#pwd" ).val().length > 12 || $( "#pwd" ).val().length<5){
+    if($( "#pwd" ).val().length > 12 || $( "#pwd" ).val().length<4){
         $('#errorPassDescription').html("<p class='errorDescription'> Пароль должен быть в пределах : 5 - 12 симв. !</p>");
         $("#send_button").attr('disabled',true);
     }
@@ -48,7 +48,7 @@ $( "#pwd" ).keydown(function() {
     }
 });
 $( "#pwd" ).focusout(function() {
-        if(( $( "#pwd" ).val().length <= 12 && $( "#pwd" ).val().length>=5 ) || $( "#pwd" ).val().length === 0 ){
+        if(( $( "#pwd" ).val().length <= 12 && $( "#pwd" ).val().length>=4 ) || $( "#pwd" ).val().length === 0 ){
             $('#errorPassDescription').html("");
         } 
 });
