@@ -38,20 +38,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     protected void configure(HttpSecurity http) throws Exception {
-        http
+
+        http.csrf()
+                .disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .failureUrl("/login?error")
+                .antMatchers("/resources/**", "/**").permitAll()
+                .anyRequest().permitAll()
+                .and();
+
+        http.formLogin()
+                .defaultSuccessUrl("/success.form")
+                .loginPage("/index")
+                .loginProcessingUrl("/j_spring_security_check")
+                .failureUrl("/error.form")
+                .usernameParameter("j_username")
+                .passwordParameter("j_password")
+                .permitAll();
+
+        http.logout()
                 .permitAll()
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and().logout().logoutSuccessUrl("/login?logout")
-                .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .logoutUrl("/index")
+                .logoutSuccessUrl("/error.form")
+                .invalidateHttpSession(true);
     }
 
 }
