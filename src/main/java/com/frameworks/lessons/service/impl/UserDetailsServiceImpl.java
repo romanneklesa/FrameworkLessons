@@ -3,7 +3,6 @@ package com.frameworks.lessons.service.impl;
 import com.frameworks.lessons.dao.UserDao;
 import com.frameworks.lessons.entity.Role;
 import com.frameworks.lessons.entity.User;
-import com.frameworks.lessons.service.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +20,18 @@ import java.util.Set;
 //Implementation of  org.springframework.security.core.userdetails.UserDetailsService interface.
 //Roman Neklesa
 
-@Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+//@Service("userDetailsService")
+public class UserDetailsServiceImpl
+        //implements UserDetailsService {
+{
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
-
+    //get user from the database, via Hibernate
     @Autowired
     private UserDao userDao;
 
-    @Override
+  //  @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 

@@ -1,29 +1,50 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: Tsyklop
-  Date: 13.07.2018
-  Time: 15:40
-  To change this template use File | Settings | File Templates.
+    Document   : index
+    Created on : 10.07.2018, 9:35:37
+    Author     : dn091097zia
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page isELIgnored="false"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
-               <link href="<c:url value="/resources/css/signup.css" />" rel="stylesheet">
-               <script src="<c:url value="/resources/js/signup.js" />"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Авторизация</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+        <link href="./resources/css/style.css" type="text/css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-<body>
-
-        <form method="POST" action="<c:url value="/login"/>">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input name="username" type="text">
-            <input name="password" type="password">
-            <button type="submit">Login</button>
-        </form>
-
-        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
-        <%@ include file="../tpl/signup.jsp" %>
+    <body>
+        <div class="container">
+            <div class="header col-lg-10 col-lg-offset-1">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="col-lg-12 col-lg-offset-3">
+                            <img src="./resources/registration.png" class="col-lg-6" alt="Cinque Terre">
+                    </div>
+                    <c:url value="/j_spring_security_check" var="loginUrl" />
+                    <form class="form-horizontal" action="${loginUrl}" method="POST">
+                          <div class="form-group">
+                            <label for="user">Логин :</label>
+                            <input type="text" name="j_username" class="form-control" id="user">
+                          </div>
+                          <div id="errorLoginDescription">
+                          </div>
+                          <div class="form-group">
+                            <label for="pwd">Пароль :</label>
+                            <input type="password" name="j_password" class="form-control" id="pwd">
+                          </div>
+                          <div id="errorPassDescription">
+                          </div>
+                          <div class="col-lg-12" id="buttonsForLogin">
+                          <button type="submit" class="btn btn-default" id="send_button" disabled="true">Отправить</button>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
+            <script src="./resources/js/loginValidation.js"></script>
 </html>

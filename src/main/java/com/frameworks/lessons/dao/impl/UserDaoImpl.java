@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.util.ArrayList;
@@ -68,19 +69,16 @@ public class UserDaoImpl implements UserDao {
 
 
 
-
-
-
     @Override
+    @Transactional
     public User findByName(String name) {
-        try {
-            return (User) sessionFactory.getCurrentSession()
-                    .createQuery("from User where name=?1")
-                    .setParameter(1, name).getSingleResult();
-
-        } catch (NoResultException e) {
-            return null;
-        }
+       /* Session session = this.sessionFactory.getCurrentSession();
+        User user = (User) session.load(User.class, new String(name));
+        logger.info("User loaded successfully, User details="+user);
+        return user;*/
+       return (User) sessionFactory.getCurrentSession().
+               getNamedQuery("User.findByName").
+               setParameter("name", name).uniqueResult();
 
     }
 
