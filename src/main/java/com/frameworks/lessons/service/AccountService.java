@@ -13,5 +13,6 @@ public interface AccountService {
 	void delete(Account account);
 
 	List<Account> listAccounts();
+	List<Account> getAccountsByUserId(int userId);
 	
 }
