@@ -6,6 +6,7 @@ import com.frameworks.lessons.entity.Role;
 import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RoleDao roleDao;
+
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional(readOnly=true)
@@ -61,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void save(User user) {
-	//	user.setPassword(user.getPassword());
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		Role roleUser = roleDao.findOne(2); // если ROLE_USER гарантирована с id=2
 		Set<Role> roles = new HashSet<>();
 		roles.add(roleUser);
