@@ -10,5 +10,5 @@ public interface AccountDao {
     void deleteAccount(int id);
     void updateAccount(Account account);
     List<Account> listAccounts();
-    List<Account> getAccountsByUserId(int userId);
+    List<Account> getAccountsByUserId(Integer userId);
 }
