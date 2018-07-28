@@ -18,6 +18,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <%  String showWrongAuthDescription = "none";
+            if(request.getAttribute("WasWrongAuth")== null || request.getAttribute("WasWrongAuth").equals("false")) showWrongAuthDescription = "none";
+            else showWrongAuthDescription = "block";
+        %>
         <div class="container">
             <div class="header col-lg-10 col-lg-offset-1">
                 <div class="col-lg-6 col-lg-offset-3">
@@ -41,10 +45,14 @@
                           <div class="col-lg-12" id="buttonsForLogin">
                           <button type="submit" class="btn btn-default" id="send_button" disabled="true">Отправить</button>
                           </div>
+                          <div class="errorDescription col-lg-12" style="display: <%= showWrongAuthDescription %>; ">
+                              <p align="center">Не верная авторизация, повторите вход !</p>
+                          </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </body>
             <script src="./resources/js/loginValidation.js"></script>
 </html>

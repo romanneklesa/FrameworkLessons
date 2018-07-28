@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .defaultSuccessUrl("/success")
-                .loginPage("/index")
+                .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/error")
                 .usernameParameter("j_username")
@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .permitAll()
                 .logoutUrl("/index")
-                .logoutSuccessUrl("/error")
+                .logoutSuccessUrl("/error.form")
                 .invalidateHttpSession(true);
     }
 

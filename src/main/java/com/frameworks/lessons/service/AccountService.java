@@ -1,8 +1,8 @@
 package com.frameworks.lessons.service;
 
-import com.frameworks.lessons.entity.Account;
-
 import java.util.List;
+
+import com.frameworks.lessons.entity.Account;
 
 public interface AccountService {
 	
@@ -13,5 +13,6 @@ public interface AccountService {
 	void delete(Account account);
 
 	List<Account> listAccounts();
+	List<Account> getAccountsByUserId(int userId);
 	
 }
