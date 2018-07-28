@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Service("userDetailsService")
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void save(User user) {
-		user.setPassword(user.getPassword());
+	//	user.setPassword(user.getPassword());
 		Role roleUser = roleDao.findOne(2); // если ROLE_USER гарантирована с id=2
 		Set<Role> roles = new HashSet<>();
 		roles.add(roleUser);
@@ -75,20 +75,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-
-		User user = dao.findByName(name);
-
-		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-
-		for (Role role : user.getRoles()) {
-			grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
-		}
-		return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), grantedAuthorities);
-
-	}
 }
 
 
