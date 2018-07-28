@@ -60,7 +60,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public List<Account> getAccountsByUserId(int userId) {
-        return sessionFactory.getCurrentSession().createQuery("from Account a where a.user.id=" + userId).getResultList();
+    public List<Account> getAccountsByUserId(Integer userId) {
+        return sessionFactory.getCurrentSession().createQuery("from Account a where a.user.id=:userId").setParameter("userId",userId).getResultList();
     }
 }
