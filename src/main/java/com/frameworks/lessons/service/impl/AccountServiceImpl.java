@@ -1,5 +1,6 @@
 package com.frameworks.lessons.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import com.frameworks.lessons.service.AccountService;
 
 @Service
 public class AccountServiceImpl implements AccountService {
-	
+
 	@Autowired
 	AccountDao dao;
 
@@ -44,6 +45,23 @@ public class AccountServiceImpl implements AccountService {
 	@Transactional(readOnly=true)
 	public List<Account> listAccounts() {
 		return dao.listAccounts();
+	}
+
+	@Override
+	public List<Account> getAccountsByUserId(int userId) {
+		List<Account> accounts;
+		//Mock data=======================================================
+		Account account1 = new Account();
+		account1.setId(243123);
+		account1.setAmount(89);
+
+		Account account2 = new Account();
+		account2.setId(1256);
+		account2.setAmount(4567);
+		
+		accounts=Arrays.asList(account1, account2);
+		//================================================================
+		return accounts;
 	}
 
 }
