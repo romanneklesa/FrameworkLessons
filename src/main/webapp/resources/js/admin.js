@@ -1,19 +1,16 @@
-function run(parent){
+$(document).ready(function(){
+    var tableUsers = $('#tableUsers').DataTable();
     $.get("/getusers",function(data) {
-        var html = "";
         data.forEach(function (item, i, arr) {
-            html = html +
-                "<tr>" +
-                "<td>" + item.id + "</td>" +
-                "<td>" + item.name + "</td>" +
-                "</tr>";
+            var html = "";
+            $.get("/accounts?id=1",function(accountsData) {
+                accountsData.forEach(function (accountItem, i, arr) {
+                    html += accountItem.amount + ",";
+                });
+            });
+            tableUsers.row.add([item.id,item.name,html,"Role"]);
         });
-        $(parent).find('tbody').append(html);
+        tableUsers.draw();
+
     });
-}
-     
-$(document).ready(function(){    
-	var parent=document.getElementById('tableUsers');
-    $('#tableUsers').DataTable();
-	run(parent);
 })
