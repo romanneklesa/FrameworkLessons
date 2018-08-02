@@ -30,7 +30,7 @@
                 <th>Role</th>
             </tr>
             </thead>
-            <tbody id="listUsers">
+            <tbody>
             </tbody>
         </table>
     </div>

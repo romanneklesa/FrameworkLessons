@@ -1,16 +1,34 @@
-$(document).ready(function(){
+$(document).ready(function () {
     var tableUsers = $('#tableUsers').DataTable();
-    $.get("/getusers",function(data) {
+    $.get("/getusers", function (data) {
+        var count = 0;
         data.forEach(function (item, i, arr) {
             var html = "";
-            $.get("/accounts?id=1",function(accountsData) {
+            var htmlRole = "";
+            html += "<select>";
+            $.get("/accounts", {id: item.id}, function (accountsData, status) {
                 accountsData.forEach(function (accountItem, i, arr) {
-                    html += accountItem.amount + ",";
+                    html += "<option value='" + accountItem.amount + "'>" + accountItem.amount + "</option>";
                 });
+            }).done(function () {
+                html += "</select>";
+                tableUsers.cell(count, 2).data(html);
+                count += 1;
             });
-            tableUsers.row.add([item.id,item.name,html,"Role"]);
+            htmlRole += "<select>";
+            item.roles.forEach(function (itemRole, i, arr) {
+                if (itemRole.role_id === 1) {
+                    htmlRole += "<option value='admin'>Admin</option>";
+                    htmlRole += "<option value='user'>User</option>";
+                }
+                else {
+                    htmlRole += "<option value='user'>User</option>";
+                    htmlRole += "<option value='admin'>Admin</option>";
+                }
+            });
+            htmlRole += "</select>";
+            tableUsers.row.add([item.id, item.name, "", htmlRole]);
         });
         tableUsers.draw();
-
     });
-})
+});
