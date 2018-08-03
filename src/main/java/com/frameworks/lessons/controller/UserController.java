@@ -35,11 +35,16 @@ public class UserController {
 	@RequestMapping(value = "/currentuseraccounts", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Account> getCurrentUserAccounts() {		
-				
-		String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
-		User currentUser = userService.findByName(currentUserName);
-		
 		List<Account> accounts;
+		User currentUser=null;
+		
+		try {
+			String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();		
+			currentUser = userService.findByName(currentUserName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		if(currentUser!=null) accounts=accountService.getAccountsByUserId(currentUser.getId());
 		else accounts=new ArrayList<>();
 	
