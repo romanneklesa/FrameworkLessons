@@ -11,7 +11,7 @@ function run(parent){
          				'<label class="col-sm-1">$</label>'+
          			'</div>';
          	});
-		    if(data==null || data.length===0) html="<label class='text-danger'>User does not have any accounts<>";
+		    if(data==null || data.length===0) html="<label class='text-danger'>User does not have any accounts</label>";
 
          	parent.innerHTML=html;
 	});
