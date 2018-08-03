@@ -36,7 +36,8 @@
             </div>
 
             <div class="form-group">
-                <input class="btn btn-success" type="submit" name="submit_reg" value="Register">
+                <input id="reg" class="btn btn-success" type="submit" name="submit_reg" value="Register">
+                <input id="send" type="submit" style="display: none"/>
             </div>
             </fieldset>
             </form>
