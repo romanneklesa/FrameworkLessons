@@ -34,7 +34,7 @@ public class UserController {
 
 	@RequestMapping(value = "/currentuseraccounts", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Account> getAccounts() {		
+	public List<Account> getCurrentUserAccounts() {		
 				
 		String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		User currentUser = userService.findByName(currentUserName);
