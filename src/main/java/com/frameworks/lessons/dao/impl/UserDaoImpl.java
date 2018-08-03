@@ -58,7 +58,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> listUsers() {
         @SuppressWarnings("unchecked")
-        List<User> userList = sessionFactory.getCurrentSession().createQuery("from user").getResultList();
+        List<User> userList = sessionFactory.getCurrentSession().createQuery("from User u join fetch u.roles").getResultList();
         for (User user : userList) {
             logger.info("User List::" + user);
         }
