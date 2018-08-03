@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class AccountDaoImpl implements AccountDao {
     private static final Logger logger = LoggerFactory.getLogger(AccountDaoImpl.class);
 
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     @Override
     public void add(Account account) {
@@ -28,7 +29,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account getAccount(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Account account = (Account) session.load(Account.class, id);
+        Account account = session.load(Account.class, id);
         logger.info("Account loaded successfully, Account details = " + account);
         return account;
     }
@@ -36,7 +37,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public void deleteAccount(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Account account = (Account) session.load(Account.class, id);
+        Account account = session.load(Account.class, id);
         if (account != null) {
             session.delete(account);
         }
@@ -52,10 +53,16 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public List<Account> listAccounts() {
         @SuppressWarnings("unchecked")
-        List<Account> accountsList = sessionFactory.getCurrentSession().createQuery("from account").getResultList();
+        List<Account> accountsList = sessionFactory.getCurrentSession().createQuery("from Account").getResultList();
         for (Account account : accountsList) {
             logger.info("Account List::" + account);
         }
         return accountsList;
+    }
+
+    @Override
+    @Transactional
+    public List<Account> getAccountsByUserId(Integer userId) {
+        return sessionFactory.getCurrentSession().createQuery("from Account a join fetch a.user.roles where a.user.id=" + userId).getResultList();
     }
 }
