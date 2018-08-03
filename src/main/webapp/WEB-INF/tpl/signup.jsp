@@ -1,27 +1,47 @@
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content" action="/action_page.php">
-    <div class="container">
-      <h1>Sign Up</h1>
-      <p>Please fill in this form to create an account.</p>
-      <hr>
-      <label for="username"><b>Username</b></label>
-      <input class="input-popup" type="text" placeholder="Enter username" id="username" name="username" required>
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
-      <label for="email"><b>Email</b></label>
-      <input class="input-popup" type="email" placeholder="Enter Email" id="email" name="email" required>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Registration form</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
 
-      <label for="psw"><b>Password</b></label>
-      <input class="input-popup" type="password" placeholder="Enter Password" id="psw" name="psw" required>
+            <form method="post" id="regForm" role="form" modelAttribute="user" action="<c:url value="/registration"/>">
+            <fieldset><legend class="text-center">Valid information is required to register. <span class="req"><small> required *</small></span></legend>
 
-      <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input class="input-popup" type="password" placeholder="Repeat Password" id="psw-repeat" name="psw-repeat" required>
+            <div class="form-group">
+                <label for="email"><span class="req">* </span> Email Address: </label>
+                    <input class="form-control" required type="text" name="email" id = "email"  onchange="email_validate(this.value);" />
+                        <div class="status" id="status"></div>
+            </div>
 
-      <div class="clearfix">
-        <button id="btn1" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button id="btn2" type="submit" class="signupbtn">Sign Up</button>
-      </div>
-    </div>
-  </form>
+            <div class="form-group">
+                <label for="username"><span class="req">* </span> User name:  <small>This will be your login user name</small> </label>
+                    <input class="form-control" type="text" name="username" id = "txt" minlength="6" maxlength="16"
+                    onkeyup = "Validate(this) return false;" placeholder="minimum 6 letters" required />
+
+            </div>
+
+            <div class="form-group">
+                <label for="password"><span class="req">* </span> Password: </label>
+                    <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16"  id="pass1" /> </p>
+
+                <label for="password"><span class="req">* </span> Password Confirm: </label>
+                    <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter again to validate"  id="pass2" onkeyup="checkPass(); return false;" />
+                        <span id="confirmMessage" class="confirmMessage"></span>
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-success" type="submit" name="submit_reg" value="Register">
+            </div>
+            </fieldset>
+            </form>
+
+          </div>
+
+	</div>
 </div>
-
