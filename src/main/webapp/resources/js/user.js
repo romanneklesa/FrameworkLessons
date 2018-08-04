@@ -1,5 +1,5 @@
 function run(parent){
-	$.get("/accounts?id=1",function(data){
+	$.get("/accounts",function(data){
 		var html=""
 			data.forEach(function(item, i, arr) {
          		html= html +

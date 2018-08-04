@@ -3,7 +3,7 @@ package com.frameworks.lessons.service.impl;
 import com.frameworks.lessons.dao.UserDao;
 import com.frameworks.lessons.entity.Role;
 import com.frameworks.lessons.entity.User;
-import com.frameworks.lessons.service.UserServiceImpl;
+import com.frameworks.lessons.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +21,21 @@ import java.util.Set;
 //Implementation of  org.springframework.security.core.userdetails.UserDetailsService interface.
 //Roman Neklesa
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+        private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+
+        @Autowired
+        private UserService userService;
+        //get user from the database, via Hibernate
 
 
-    @Autowired
-    private UserDao userDao;
+          @Override
 
-    @Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        public UserDetails loadUserByUsername (String name) throws UsernameNotFoundException {
 
-        User user = userDao.findByName(name);
+        User user = userService.findByName(name);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
 
@@ -44,4 +45,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), grantedAuthorities);
 
     }
-}
+    }

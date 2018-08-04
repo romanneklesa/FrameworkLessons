@@ -17,7 +17,7 @@ public class AccountDaoImpl implements AccountDao {
     private static final Logger logger = LoggerFactory.getLogger(AccountDaoImpl.class);
 
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     @Override
     public void add(Account account) {
@@ -28,7 +28,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account getAccount(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Account account = (Account) session.load(Account.class, id);
+        Account account = session.load(Account.class, id);
         logger.info("Account loaded successfully, Account details = " + account);
         return account;
     }
@@ -36,7 +36,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public void deleteAccount(int id) {
         Session session = sessionFactory.getCurrentSession();
-        Account account = (Account) session.load(Account.class, id);
+        Account account = session.load(Account.class, id);
         if (account != null) {
             session.delete(account);
         }
@@ -52,10 +52,15 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public List<Account> listAccounts() {
         @SuppressWarnings("unchecked")
-        List<Account> accountsList = sessionFactory.getCurrentSession().createQuery("from account").getResultList();
+        List<Account> accountsList = sessionFactory.getCurrentSession().createQuery("from Account").getResultList();
         for (Account account : accountsList) {
             logger.info("Account List::" + account);
         }
         return accountsList;
+    }
+
+    @Override
+    public List<Account> getAccountsByUserId(Integer userId) {
+        return sessionFactory.getCurrentSession().createQuery("from Account a where a.user.id=:userId").setParameter("userId",userId).getResultList();
     }
 }

@@ -1,7 +1,5 @@
 package com.frameworks.lessons.config;
 
-import com.frameworks.lessons.service.UserService;
-import com.frameworks.lessons.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

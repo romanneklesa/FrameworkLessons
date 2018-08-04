@@ -2,14 +2,19 @@ package com.frameworks.lessons.config;
 
 import com.frameworks.lessons.dao.UserDao;
 
+import com.frameworks.lessons.service.UserService;
+import com.frameworks.lessons.service.impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
@@ -26,15 +31,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     UserDao userDao;
 
     @Autowired
+    @Qualifier("userDetailsService")
+    UserDetailsService userDetailsService;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         // Временный пользователя который находятся в памяти. Позже будет привязка к БД
 
         //auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("user")).roles("USER");
          auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
-
+         auth.userDetailsService(userDetailsService);
+         auth.authenticationProvider(authenticationProvider());
     }
 
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
 
 
     protected void configure(HttpSecurity http) throws Exception {

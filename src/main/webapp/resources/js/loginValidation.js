@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,20 +14,20 @@ $( "#user" ).keydown(function() {
     }
     else{
         if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test($( "#user" ).val()))){
-        $('#errorLoginDescription').html("<p class='errorDescription'> Используйте киррилицу и знаки ( - _ )!</p>"); 
+        $('#errorLoginDescription').html("<p class='errorDescription'> Используйте киррилицу и знаки ( - _ )!</p>");
         $("#send_button").attr('disabled',true);
         }
         else {
         $('#errorLoginDescription').html("");
         isLoginSuccess = true;
-        if(isLoginSuccess == true && isPasswordSuccess == true)$("#send_button").removeAttr('disabled');                
-        } 
+        if(isLoginSuccess == true && isPasswordSuccess == true)$("#send_button").removeAttr('disabled');
+        }
     }
 });
 $( "#user" ).focusout(function() {
         if(( $( "#user" ).val().length <= 12 && $( "#user" ).val().length>=4 ) || $( "#user" ).val().length === 0 ){
              $('#errorLoginDescription').html("");
-        } 
+        }
 });
 $( "#pwd" ).keydown(function() {
     isPasswordSuccess = false;
@@ -37,19 +37,19 @@ $( "#pwd" ).keydown(function() {
     }
     else{
         if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test($( "#pwd" ).val()))){
-        $('#errorPassDescription').html("<p class='errorDescription'> Используйте киррилицу и знаки ( - _ )!</p>");  
+        $('#errorPassDescription').html("<p class='errorDescription'> Используйте киррилицу и знаки ( - _ )!</p>");
         $("#send_button").attr('disabled',true);
         }
         else {
         $('#errorPassDescription').html("");
         isPasswordSuccess = true;
-        if(isLoginSuccess == true && isPasswordSuccess == true)$("#send_button").removeAttr('disabled');        
+        if(isLoginSuccess == true && isPasswordSuccess == true)$("#send_button").removeAttr('disabled');
         }
     }
 });
 $( "#pwd" ).focusout(function() {
         if(( $( "#pwd" ).val().length <= 12 && $( "#pwd" ).val().length>=4 ) || $( "#pwd" ).val().length === 0 ){
             $('#errorPassDescription').html("");
-        } 
+        }
 });
 

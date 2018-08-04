@@ -58,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
 		Account account2 = new Account();
 		account2.setId(1256);
 		account2.setAmount(4567);
-		
+
 		accounts=Arrays.asList(account1, account2);
 		//================================================================
 		return accounts;
