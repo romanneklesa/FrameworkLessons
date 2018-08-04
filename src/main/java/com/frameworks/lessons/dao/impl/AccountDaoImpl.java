@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -60,7 +61,8 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
+    @Transactional
     public List<Account> getAccountsByUserId(Integer userId) {
-        return sessionFactory.getCurrentSession().createQuery("from Account a where a.user.id=:userId").setParameter("userId",userId).getResultList();
+        return sessionFactory.getCurrentSession().createQuery("from Account a join fetch a.user.roles where a.user.id=" + userId).getResultList();
     }
 }

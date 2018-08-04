@@ -49,18 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public List<Account> getAccountsByUserId(int userId) {
-		List<Account> accounts;
-		//Mock data=======================================================
-		Account account1 = new Account();
-		account1.setId(243123);
-		account1.setAmount(89);
-
-		Account account2 = new Account();
-		account2.setId(1256);
-		account2.setAmount(4567);
-
-		accounts=Arrays.asList(account1, account2);
-		//================================================================
+		List<Account> accounts=dao.getAccountsByUserId(userId);
 		return accounts;
 	}
 

@@ -3,13 +3,16 @@ package com.frameworks.lessons.controller;
 import com.frameworks.lessons.entity.Account;
 import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.service.AccountService;
+import com.frameworks.lessons.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,18 +21,39 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
 	@Autowired
-    private AccountService accountService;
-    
-    @GetMapping(value = "/user")
-    private ModelAndView user(ModelAndView view) {
-        view.setViewName("user");
-        return view;
-    }
-    
-    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
+	private AccountService accountService;
+
+	@Autowired
+	private UserService userService;
+
+	@GetMapping(value = "/user")
+	private ModelAndView user(ModelAndView view) {
+		view.setViewName("user");
+		return view;
+	}
+
+	@RequestMapping(value = "/currentuseraccounts", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Account> getCurrentUserAccounts() {		
+		List<Account> accounts;
+		User currentUser=null;
+		
+		try {
+			String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();		
+			currentUser = userService.findByName(currentUserName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if(currentUser!=null) accounts=accountService.getAccountsByUserId(currentUser.getId());
+		else accounts=new ArrayList<>();
+	
+		return accounts;
+	}
+	
+	@RequestMapping(value = "/accounts", method = RequestMethod.GET)
     @ResponseBody
     public List<Account> getAccounts(@RequestParam("id") int id) {
-    	List<Account> accounts=accountService.getAccountsByUserId(id);
-      return accounts;
+		return accountService.getAccountsByUserId(id);
     }
 }
