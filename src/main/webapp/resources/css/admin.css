@@ -1,0 +1,19 @@
+.container {
+    width: 430px;
+    position: absolute;
+    left: 50%;
+    margin-left: -200px;
+}
+
+.text-primary{
+    text-align: center;
+}
+
+#addUser {
+    margin-right: 100px;
+    margin-bottom: 50px;
+}
+
+#logout {
+    margin-bottom: 50px;
+}

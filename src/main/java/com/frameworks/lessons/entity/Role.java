@@ -1,6 +1,7 @@
 package com.frameworks.lessons.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -30,6 +31,7 @@ public class Role {
     public void setRole(String role) {
         role = role;
     }
+
 
     @Override
     public String toString() {

@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,14 +27,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void add(User user) {
         sessionFactory.getCurrentSession().save(user);
-        logger.info("User saved successfully, User Details="+user);
+        logger.info("User saved successfully, User Details=" + user);
     }
 
     @Override
     public User getUser(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         User user = (User) session.load(User.class, new Integer(id));
-        logger.info("User loaded successfully, User details="+user);
+        logger.info("User loaded successfully, User details=" + user);
         return user;
     }
 
@@ -40,50 +42,36 @@ public class UserDaoImpl implements UserDao {
     public void deleteUser(int id) {
         Session session = sessionFactory.getCurrentSession();
         User user = (User) session.load(User.class, new Integer(id));
-        if(null != user){
+        if (null != user) {
             session.delete(user);
         }
-        logger.info("User deleted successfully, user details="+user);
+        logger.info("User deleted successfully, user details=" + user);
 
     }
 
     @Override
     public void updateUser(User user) {
         sessionFactory.getCurrentSession().update(user);
-        logger.info("User updated successfully, User Details="+user);
+        logger.info("User updated successfully, User Details=" + user);
     }
 
     @Override
     public List<User> listUsers() {
         @SuppressWarnings("unchecked")
-        List<User> userList = sessionFactory.getCurrentSession().createQuery("from user").getResultList();
-        for(User user : userList){
-            logger.info("User List::"+user);
+        List<User> userList = sessionFactory.getCurrentSession().createQuery("from User u join fetch u.roles").getResultList();
+        for (User user : userList) {
+            logger.info("User List::" + user);
         }
         return userList;
     }
 
 
-
-
-
-
-
-
-
     @Override
+    @Transactional
     public User findByName(String name) {
-        try {
-            return (User) sessionFactory.getCurrentSession()
-                    .createQuery("from User where name=?1")
-                    .setParameter(1, name).getSingleResult();
-
-        } catch (NoResultException e) {
-            return null;
-        }
-
+        User user = (User) sessionFactory.getCurrentSession().
+                createQuery("from User u join fetch u.roles where u.name = '" + name + "'").uniqueResult();
+        return user;
     }
-
-
 
 }

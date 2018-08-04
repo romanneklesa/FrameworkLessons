@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public List<Account> getAccountsByUserId(int userId) {
-		List<Account> accounts=dao.getAccountsByUserId(userId);	
+		List<Account> accounts=dao.getAccountsByUserId(userId);
 		return accounts;
 	}
 
