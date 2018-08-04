@@ -1,5 +1,7 @@
 package com.frameworks.lessons.entity;
 
+import com.frameworks.lessons.model.Role;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -21,13 +23,13 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    /*@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private Role role;*/
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roleId")
+    private Role role;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    /*@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    private Set<Role> roles;
+    private Set<Role> roles;*/
 
     @Override
     public String toString(){
@@ -65,19 +67,20 @@ public class User {
         this.password = password;
     }
 
-    /*  public Role getRole() {
-          return role;
-      }
+    public Role getRole() {
+        return role;
+    }
 
-      public void setRole(Role role) {
-          this.role = role;
-      }*/
-    public Set<Role> getRoles() {
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    /*public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRole(Set<Role> roles) {
         this.roles = roles;
-    }
+    }*/
 
 }

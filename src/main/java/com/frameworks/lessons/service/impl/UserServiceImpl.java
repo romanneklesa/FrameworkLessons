@@ -2,8 +2,8 @@ package com.frameworks.lessons.service.impl;
 
 import com.frameworks.lessons.dao.RoleDao;
 import com.frameworks.lessons.dao.UserDao;
-import com.frameworks.lessons.entity.Role;
 import com.frameworks.lessons.entity.User;
+import com.frameworks.lessons.model.Role;
 import com.frameworks.lessons.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -65,11 +65,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void save(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		Role roleUser = roleDao.findOne(2); // если ROLE_USER гарантирована с id=2
-		Set<Role> roles = new HashSet<>();
-		roles.add(roleUser);
-		user.setRole(roles);
+
+		if(!passwordEncoder.matches(user.getPassword(), user.getPassword())) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+		}
+
+		user.setRole(Role.USER);
 		dao.add(user);
 
 	}

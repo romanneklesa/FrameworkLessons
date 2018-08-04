@@ -1,7 +1,5 @@
 package com.frameworks.lessons.service.impl;
 
-import com.frameworks.lessons.dao.UserDao;
-import com.frameworks.lessons.entity.Role;
 import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.service.UserService;
 import org.slf4j.Logger;
@@ -13,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,25 +21,20 @@ import java.util.Set;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-        private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
-        @Autowired
-        private UserService userService;
-        //get user from the database, via Hibernate
+    @Autowired
+    private UserService userService;
+    //get user from the database, via Hibernate
 
-
-          @Override
-
-        public UserDetails loadUserByUsername (String name) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 
         User user = userService.findByName(name);
-
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
-        for (Role role : user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
-        }
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), grantedAuthorities);
 
     }
-    }
+}
