@@ -28,8 +28,8 @@ public class UserController {
     
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     @ResponseBody
-    public List<Account> getAccounts(/*@RequestParam("id") int id*/) {
-    	List<Account> accounts=accountService.getAccountsByUserId(1);
+    public List<Account> getAccounts(@RequestParam("id") int id) {
+    	List<Account> accounts=accountService.getAccountsByUserId(id);
       return accounts;
     }
 }
