@@ -4,19 +4,20 @@ import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BaseController {
 
+    @Autowired
     private UserService userService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
 
     @GetMapping(value = {"/", "/index"})
     private ModelAndView index(ModelAndView view) {
@@ -46,24 +47,4 @@ public class BaseController {
 //        // Prepare the response string
 //        return response;
 //    }
-
-
-    @RequestMapping(value="/registration", method=RequestMethod.GET)
-    public ModelAndView newUserPage() {
-        ModelAndView mav = new ModelAndView("registration", "user", new User());
-        return mav;
-    }
-
-    @RequestMapping(value="/registration", method=RequestMethod.POST)
-    public ModelAndView createNewUser(@ModelAttribute @Validated User user) {
-
-        ModelAndView mav = new ModelAndView();
-
-        userService.save(user);
-        mav.setViewName("redirect:/index.html");
-
-        // redirectAttributes.addFlashAttribute("message", message);
-        return mav;
-    }
-
 }

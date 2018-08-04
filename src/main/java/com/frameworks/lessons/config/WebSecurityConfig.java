@@ -40,9 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Временный пользователя который находятся в памяти. Позже будет привязка к БД
 
         //auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("user")).roles("USER");
-         auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
-         auth.userDetailsService(userDetailsService);
-         auth.authenticationProvider(authenticationProvider());
+        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
+        auth.userDetailsService(userDetailsService);
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Bean
@@ -74,9 +74,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.logout()
                 .permitAll()
-                .logoutUrl("/index")
-                .logoutSuccessUrl("/error.form")
-                .invalidateHttpSession(true);
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true);
     }
 
 }
