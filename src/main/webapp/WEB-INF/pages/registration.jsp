@@ -9,7 +9,6 @@
 </head>
 <body>
 <h1>New User page</h1>
-<i>${message}</i><br/>
 <form:form method="POST" modelAttribute="user" action="${pageContext.request.contextPath}/registration.html" >
 <table>
 <tbody>

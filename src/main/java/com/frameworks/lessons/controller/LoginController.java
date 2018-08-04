@@ -5,9 +5,6 @@
  */
 package com.frameworks.lessons.controller;
 
-
-import com.frameworks.lessons.service.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller 
 public class LoginController {
-
-
 
     @GetMapping(value = "/success")
     public String successLogin(Model model, HttpServletRequest request) {

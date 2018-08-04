@@ -14,8 +14,7 @@ public class Role {
     @Column(name = "role", unique = true)
     private String role;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+
 
     public int getRole_id() {
         return role_id;
@@ -33,13 +32,6 @@ public class Role {
         role = role;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 
     @Override
     public String toString() {

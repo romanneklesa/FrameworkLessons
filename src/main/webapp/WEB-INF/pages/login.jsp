@@ -16,6 +16,7 @@
         <link href="./resources/css/style.css" type="text/css" rel="stylesheet"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+          <script src="./resources/js/signup.js"></script>
     </head>
     <body>
         <%  String showWrongAuthDescription = "none";
@@ -45,6 +46,11 @@
                           <div class="col-lg-12" id="buttonsForLogin">
                           <button type="submit" class="btn btn-default" id="send_button" disabled="true">Отправить</button>
                           </div>
+
+                           <div class="col-lg-12" id="buttonsForSignup">
+                               <button type="button" class="btn btn-default pull-right" id="signupButton">Sign up</button>
+                            </div>
+
                           <div class="errorDescription col-lg-12" style="display: <%= showWrongAuthDescription %>; ">
                               <p align="center">Не верная авторизация, повторите вход !</p>
                           </div>
@@ -54,5 +60,6 @@
         </div>
 
     </body>
+            <%@ include file="../tpl/signup.jsp" %>
             <script src="./resources/js/loginValidation.js"></script>
 </html>
