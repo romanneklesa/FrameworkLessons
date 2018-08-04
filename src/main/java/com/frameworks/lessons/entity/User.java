@@ -23,8 +23,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roleId")
+    @Column(name = "role")
     private Role role;
 
     /*@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
