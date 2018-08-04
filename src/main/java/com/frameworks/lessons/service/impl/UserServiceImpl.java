@@ -1,6 +1,5 @@
 package com.frameworks.lessons.service.impl;
 
-import com.frameworks.lessons.dao.RoleDao;
 import com.frameworks.lessons.dao.UserDao;
 import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.model.Role;
@@ -10,18 +9,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao dao;
-
+/*
 	@Autowired
-	private RoleDao roleDao;
+	private RoleDao roleDao;*/
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
