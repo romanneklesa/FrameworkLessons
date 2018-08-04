@@ -43,12 +43,12 @@
                           </div>
                           <div id="errorPassDescription">
                           </div>
-                          <div class="col-lg-12" id="buttonsForLogin">
+                          <div class="col-lg-6" id="buttonsForLogin">
                           <button type="submit" class="btn btn-default" id="send_button" disabled="true">Отправить</button>
                           </div>
 
-                           <div class="col-lg-12" id="buttonsForSignup">
-                               <button type="button" class="btn btn-default pull-right" id="signupButton">Sign up</button>
+                           <div class="col-lg-6" id="buttonsForSignup">
+                               <button type="button" class="btn btn-default" id="signupButton">Sign up</button>
                             </div>
 
                           <div class="errorDescription col-lg-12" style="display: <%= showWrongAuthDescription %>; ">
