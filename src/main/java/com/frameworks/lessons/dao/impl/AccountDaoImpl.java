@@ -63,6 +63,6 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     @Transactional
     public List<Account> getAccountsByUserId(Integer userId) {
-        return sessionFactory.getCurrentSession().createQuery("from Account a join fetch a.user.roles where a.user.id=" + userId).getResultList();
+        return sessionFactory.getCurrentSession().createQuery("from Account a where a.user.id=" + userId).getResultList();
     }
 }

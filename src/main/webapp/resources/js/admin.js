@@ -15,7 +15,7 @@ $(document).ready(function () {
                 tableUsers.cell(count, 2).data(html);
                 count += 1;
             });
-            htmlRole += "<select>";
+            /*htmlRole += "<select>";
             item.roles.forEach(function (itemRole, i, arr) {
                 if (itemRole.role_id === 1) {
                     htmlRole += "<option value='admin'>Admin</option>";
@@ -26,8 +26,8 @@ $(document).ready(function () {
                     htmlRole += "<option value='admin'>Admin</option>";
                 }
             });
-            htmlRole += "</select>";
-            tableUsers.row.add([item.id, item.name, "", htmlRole]);
+            htmlRole += "</select>";*/
+            tableUsers.row.add([item.id, item.name, "", item.role]);
         });
         tableUsers.draw();
     });
