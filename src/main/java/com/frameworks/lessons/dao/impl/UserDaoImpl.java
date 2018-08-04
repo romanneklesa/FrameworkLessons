@@ -70,7 +70,7 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     public User findByName(String name) {
         User user = (User) sessionFactory.getCurrentSession().
-                createQuery("from User u join fetch u.roles where u.name = '" + name + "'").uniqueResult();
+                createQuery("from User u where u.name = '" + name + "'").uniqueResult();
         return user;
     }
 
