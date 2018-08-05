@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Временный пользователя который находятся в памяти. Позже будет привязка к БД
 
         //auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("user")).roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("d033e22ae348aeb5660fc2140aec35850c4da997")).roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
         auth.userDetailsService(userDetailsService);
         auth.authenticationProvider(authenticationProvider());
     }
@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/signup", "/checkInputs", "/registration").permitAll()
+                .antMatchers("/resources/**", "/signup", "/checkInputs", "/registration","/login").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
