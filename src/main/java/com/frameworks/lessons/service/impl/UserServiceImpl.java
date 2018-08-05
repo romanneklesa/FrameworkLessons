@@ -31,6 +31,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly=true)
+	public User findByEmail(String email) {
+		return dao.findByEmail(email);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
 	public User findById(int id) {
 		return dao.getUser(id);
 	}
