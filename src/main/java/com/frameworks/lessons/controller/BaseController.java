@@ -35,16 +35,4 @@ public class BaseController {
         return view;
     }
 
-    /*@RequestMapping(method = RequestMethod.POST, value="/signup" )
-    public String onSubmit(@ModelAttribute("user") User user ) {
-        return  userService.add(user);
-    }*/
-
-//    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-//    public @ResponseBody String processAJAXRequest(@ModelAttribute("user") User user)  {
-//        String response = "";
-//        // Process the request
-//        // Prepare the response string
-//        return response;
-//    }
 }

@@ -7,6 +7,8 @@ public interface UserService {
 
 	User findByName(String name);
 
+    User findByEmail(String email);
+
 	User findById(int id);
 
     void add(User user);

@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Repository
@@ -71,6 +67,15 @@ public class UserDaoImpl implements UserDao {
     public User findByName(String name) {
         User user = (User) sessionFactory.getCurrentSession().
                 createQuery("from User u where u.name = '" + name + "'").uniqueResult();
+        return user;
+    }
+
+
+    @Override
+    @Transactional
+    public User findByEmail(String email) {
+        User user = (User) sessionFactory.getCurrentSession().
+                createQuery("from User u where u.email = '" + email + "'").uniqueResult();
         return user;
     }
 

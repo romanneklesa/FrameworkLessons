@@ -15,34 +15,35 @@
 
             <div class="form-group">
                 <label for="email"><span class="req">* </span> Email Address: </label>
-                    <input class="form-control" required type="text" name="email" id = "email"  onchange="email_validate(this.value);" />
+                    <input class="form-control" required type="text" name="email" id = "email"  onblur="email_validate(this.value);" />
                         <div class="status" id="status"></div>
             </div>
 
             <div class="form-group">
-                <label for="username"><span class="req">* </span> User name:  <small>This will be your login user name</small> </label>
-                    <input class="form-control" type="text" name="username" id = "txt" minlength="6" maxlength="16"
-                    onkeyup = "Validate(this) return false;" placeholder="minimum 6 letters" required />
+                <label for="name"><span class="req">* </span> User name:  <small>This will be your login user name</small> </label>
+                    <input class="form-control" type="text" name="name" id = "name" minlength="5" maxlength="16"
+                    onblur="Validate(this)" placeholder="minimum 5 letters" required />
+                <div class="nameValid" id="nameValid"></div>
 
             </div>
 
             <div class="form-group">
                 <label for="password"><span class="req">* </span> Password: </label>
-                    <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16"  id="pass1" /> </p>
+                    <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16"  id="pass1" onkeyup="checkPass();" /> </p>
 
-                <label for="password"><span class="req">* </span> Password Confirm: </label>
-                    <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter again to validate"  id="pass2" onkeyup="checkPass(); return false;" />
+                <label for="password1"><span class="req">* </span> Password Confirm: </label>
+                    <input required name="password1" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter again to validate"  id="pass2" onkeyup="checkPass();" />
                         <span id="confirmMessage" class="confirmMessage"></span>
             </div>
 
             <div class="form-group">
-                <input id="reg" class="btn btn-success" type="submit" name="submit_reg" value="Register">
-                <input id="send" type="submit" style="display: none"/>
-            </div>
+                <input id="reg" class="btn btn-success" type="submit" onclick="return beforeSubmit()" name="submit_reg" value="Register">
+                           </div>
             </fieldset>
             </form>
 
           </div>
 
 	</div>
-</div>
+    </div>
+  </div>
