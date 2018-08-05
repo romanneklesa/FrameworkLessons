@@ -1,55 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-var isLoginSuccess = false;
-var isPasswordSuccess = false;
+let errorLogin=$('#errorLoginDescription');
+let errorPass=$('#errorPassDescription');
 
-$( "#user" ).keydown(function() {
-    isLoginSuccess = false;
-    if($( "#user" ).val().length > 12 || $( "#user" ).val().length<4){
-        $('#errorLoginDescription').html("<p class='errorDescription'> Логин должен быть в пределах : 5 - 12 симв. !</p>");
-        $("#send_button").attr('disabled',true);
+function passwordIsValid(pass){
+    errorPass.html("");
+    if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test(pass))){
+        errorPass.html("<p class='errorDescription'>Password must contain latin characters, digits, underscores (_) and minus(-) symbols only</p>");
+        return false;
     }
-    else{
-        if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test($( "#user" ).val()))){
-        $('#errorLoginDescription').html("<p class='errorDescription'> Используйте киррилицу и знаки ( - _ )!</p>");
-        $("#send_button").attr('disabled',true);
+    else {
+        if (pass.length <= 12 && pass.length >= 4) {
+            return true;
         }
         else {
-        $('#errorLoginDescription').html("");
-        isLoginSuccess = true;
-        if(isLoginSuccess == true && isPasswordSuccess == true)$("#send_button").removeAttr('disabled');
+            errorPass.html("<p class='errorDescription'>Password length have to be from 5 to 12 symbols</p>");
+            return false;
         }
     }
-});
-$( "#user" ).focusout(function() {
-        if(( $( "#user" ).val().length <= 12 && $( "#user" ).val().length>=4 ) || $( "#user" ).val().length === 0 ){
-             $('#errorLoginDescription').html("");
-        }
-});
-$( "#pwd" ).keydown(function() {
-    isPasswordSuccess = false;
-    if($( "#pwd" ).val().length > 12 || $( "#pwd" ).val().length<4){
-        $('#errorPassDescription').html("<p class='errorDescription'> Пароль должен быть в пределах : 5 - 12 симв. !</p>");
-        $("#send_button").attr('disabled',true);
+
+}
+
+function loginIsValid(login){
+    errorLogin.html("");
+    if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test(login))){
+        errorLogin.html("<p class='errorDescription'>Login must contain latin characters, digits, underscores (_) and minus(-) symbols only</p>");
+        return false;
     }
-    else{
-        if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test($( "#pwd" ).val()))){
-        $('#errorPassDescription').html("<p class='errorDescription'> Используйте киррилицу и знаки ( - _ )!</p>");
-        $("#send_button").attr('disabled',true);
+    else {
+        if (login.length <= 12 && login.length >= 4) {
+            return true;
         }
         else {
-        $('#errorPassDescription').html("");
-        isPasswordSuccess = true;
-        if(isLoginSuccess == true && isPasswordSuccess == true)$("#send_button").removeAttr('disabled');
+            errorLogin.html("<p class='errorDescription'>Login length have to be from 5 to 12 symbols</p>");
+            return false;
         }
     }
-});
-$( "#pwd" ).focusout(function() {
-        if(( $( "#pwd" ).val().length <= 12 && $( "#pwd" ).val().length>=4 ) || $( "#pwd" ).val().length === 0 ){
-            $('#errorPassDescription').html("");
-        }
-});
+}
+
+function setSendButtonDisabledAttribute(){
+    if(loginIsValid($( "#user" ).val()) & passwordIsValid($( "#pwd" ).val())){
+        $("#send_button").attr('disabled',false);
+    }
+    else $("#send_button").attr('disabled',true);
+}
+
+$('#user').on("input",setSendButtonDisabledAttribute);
+$('#pwd').on("input",setSendButtonDisabledAttribute);
 
