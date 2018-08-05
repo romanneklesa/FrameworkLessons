@@ -6,7 +6,7 @@
     </Properties>
 
     <Appenders>
-        <RollingFile name="fileLogger" fileName="lessons.log" filePattern="lessons-%d{yyyy-MM-dd}.log">
+        <RollingFile name="fileLogger" fileName="/lessons.log" filePattern="/lessons-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <pattern>${pattern}</pattern>
             </PatternLayout>
