@@ -41,7 +41,7 @@
 
             <hr>
             <button class="btn btn-warning" id="addUser" onclick="addUserOnClick()">New user</button>
-            <button class="btn btn-warning" id="logout" onclick="logoutOnClick()">Log out</button>
+            <a class="btn btn-warning"" href="<c:url value="/logout" />" role="button">Log out</a>
         </div>
     </div>
     </body>
