@@ -19,7 +19,7 @@
           <form role="form" class="form-horizontal" id="parent">
           </form>
           <hr>
-          <button class="btn btn-warning" id="logout" onclick="logoutOnClick()">Log out</button>
+          <p><a class="btn btn-lg btn-danger" href="<c:url value="/logout" />" role="button">Log out</a></p>
       </div>
     </body>  
 </html>
