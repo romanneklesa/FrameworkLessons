@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 
 /**
@@ -24,6 +25,12 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private AccountService accountService;
+
+    @GetMapping(value = "/admin")
+    private ModelAndView addmin(ModelAndView view) {
+        view.setViewName("admin");
+        return view;
+    }
 
     @GetMapping(value = "/getusers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAllUsers() {
@@ -53,7 +60,7 @@ public class AdminController {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readValue(s, JsonNode.class); // парсинг текста
             String account_id = rootNode.get("account_id").asText();
-            String amount = rootNode.get("account_id").asText();
+            String amount = rootNode.get("amount").asText();
             Account account = accountService.getById(Integer.parseInt(account_id));
             account.setAmount(Integer.parseInt(amount));
             accountService.update(account);

@@ -5,16 +5,7 @@ $(document).ready(function () {
         data.forEach(function (item, i, arr) {
             var html = "";
             var htmlRole = "";
-            html += "<select>";
-            $.get("/accounts", {id: item.id}, function (accountsData, status) {
-                accountsData.forEach(function (accountItem, i, arr) {
-                    html += "<option value='" + accountItem.amount + "'>" + accountItem.amount + "</option>";
-                });
-            }).done(function () {
-                html += "</select>";
-                tableUsers.cell(count, 2).data(html);
-                count += 1;
-            });
+            html += "<select class='target' id='selectAmountUser"+ item.id +"' onmouseover = 'getAmount("+ item.id +")'>";
             /*htmlRole += "<select>";
             item.roles.forEach(function (itemRole, i, arr) {
                 if (itemRole.role_id === 1) {
@@ -27,8 +18,25 @@ $(document).ready(function () {
                 }
             });
             htmlRole += "</select>";*/
-            tableUsers.row.add([item.id, item.name, "", item.role]);
+            tableUsers.row.add([item.id, item.name, html, item.role]);
         });
         tableUsers.draw();
+    }).done(function () {
+        $( ".target" ).change(function() {
+            var ammountId = this.value;
+            $.post("/updateaccount", {account_id:ammountId, amount:25})
+        });
     });
+
+
 });
+
+function getAmount(userId) {
+    $.get("/accounts", {id: userId}, function (accountsData, status) {
+        accountsData.forEach(function (accountItem, i, arr) {
+            if ( $('#selectAmountUser'+ userId).children('option').length < 3) {
+                $("#selectAmountUser" + userId).append($("<option value='" + accountItem.id + "'>Account " + accountItem.id + ": " + accountItem.amount + "</option>"));
+            }
+        });
+    });
+}
