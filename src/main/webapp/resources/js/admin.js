@@ -22,9 +22,12 @@ $(document).ready(function () {
         });
         tableUsers.draw();
     }).done(function () {
-        $( ".target" ).change(function() {
-            var ammountId = this.value;
-            $.post("/updateaccount", {account_id:ammountId, amount:25})
+        $( ".target" ).change(function(event) {
+            alert(event.target.id);
+            var amountId = this.value;
+            $.post("/updateaccount", {account_id:amountId, amount:27});
+            $(this).text('27');
+            //$.post("/updateaccount", JSON.stringify({account_id: "8",amount: "124124"}));
         });
     });
 
@@ -32,11 +35,11 @@ $(document).ready(function () {
 });
 
 function getAmount(userId) {
-    $.get("/accounts", {id: userId}, function (accountsData, status) {
-        accountsData.forEach(function (accountItem, i, arr) {
-            if ( $('#selectAmountUser'+ userId).children('option').length < 3) {
+    if ( $('#selectAmountUser'+ userId).children('option').length === 0) {
+        $.get("/accounts", {id: userId}, function (accountsData, status) {
+            accountsData.forEach(function (accountItem, i, arr) {
                 $("#selectAmountUser" + userId).append($("<option value='" + accountItem.id + "'>Account " + accountItem.id + ": " + accountItem.amount + "</option>"));
-            }
+            });
         });
-    });
+    }
 }
