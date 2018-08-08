@@ -21,18 +21,18 @@
 
             <div class="form-group">
                 <label for="name"><span class="req">* </span> User name:  <small>This will be your login user name</small> </label>
-                    <input class="form-control" type="text" name="name" id = "name" minlength="5" maxlength="16"
-                    onblur="Validate(this)" placeholder="minimum 5 letters" required />
+                    <input class="form-control" type="text" name="name" id = "name"
+                    onblur="return Validate(this)" placeholder="from 5 to 12 letters" required />
                 <div class="nameValid" id="nameValid"></div>
 
             </div>
 
             <div class="form-group">
                 <label for="password"><span class="req">* </span> Password: </label>
-                    <input required name="password" type="password" class="form-control inputpass" minlength="4" maxlength="16"  id="pass1" onkeyup="checkPass();" /> </p>
+                    <input required name="password" type="password" class="form-control inputpass" id="pass1" onkeyup="checkPass();" /> </p>
 
                 <label for="password1"><span class="req">* </span> Password Confirm: </label>
-                    <input required name="password1" type="password" class="form-control inputpass" minlength="4" maxlength="16" placeholder="Enter again to validate"  id="pass2" onkeyup="checkPass();" />
+                    <input required name="password1" type="password" class="form-control inputpass" placeholder="Enter again to validate"  id="pass2" onkeyup="checkPass();" />
                         <span id="confirmMessage" class="confirmMessage"></span>
             </div>
 
