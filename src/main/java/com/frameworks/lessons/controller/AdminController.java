@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 
 /**
@@ -25,6 +26,12 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private AccountService accountService;
+
+    @GetMapping(value = "/admin")
+    private ModelAndView admin(ModelAndView view) {
+        view.setViewName("admin");
+        return view;
+    }
 
     @GetMapping(value = "/getusers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAllUsers() {
