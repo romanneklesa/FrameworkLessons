@@ -32,19 +32,19 @@
                     <c:url value="/j_spring_security_check" var="loginUrl" />
                     <form class="form-horizontal" action="${loginUrl}" method="POST">
                           <div class="form-group">
-                            <label for="user">Логин :</label>
+                            <label for="user">Login :</label>
                             <input type="text" name="j_username" class="form-control" id="user">
                           </div>
                           <div id="errorLoginDescription">
                           </div>
                           <div class="form-group">
-                            <label for="pwd">Пароль :</label>
+                            <label for="pwd">Password :</label>
                             <input type="password" name="j_password" class="form-control" id="pwd">
                           </div>
                           <div id="errorPassDescription">
                           </div>
                           <div class="col-lg-6" id="buttonsForLogin">
-                          <button type="submit" class="btn btn-default" id="send_button" disabled="true">Отправить</button>
+                          <button type="submit" class="btn btn-default" id="send_button" disabled="true">Login</button>
                           </div>
 
                            <div class="col-lg-6" id="buttonsForSignup">
@@ -52,7 +52,7 @@
                             </div>
 
                           <div class="errorDescription col-lg-12" style="display: <%= showWrongAuthDescription %>; ">
-                              <p align="center">Не верная авторизация, повторите вход !</p>
+                              <p align="center">Wrong data, please enter again!</p>
                           </div>
                     </form>
                 </div>
