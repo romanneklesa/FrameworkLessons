@@ -43,7 +43,7 @@ function addUserOnClick() {
         "<td style='text-align: center'>0, 0, 0</td>" +                   // accounts
         "<td>" + htmlRole + "</td>" +                                     // role
         "<td><button type='button' class='btn btn-light' onclick='saveNewUser()'>Save</button></td></tr>";
-    $("tbody").html(html);
+    if (!$('input').is("#newUserNameInput")) $("tbody").html(html);
 }
 
 function saveNewUser() {
