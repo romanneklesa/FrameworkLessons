@@ -2,11 +2,9 @@ package com.frameworks.lessons.controller;
 
 import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.service.UserService;
-import com.frameworks.lessons.validator.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -21,9 +19,6 @@ public class RegistrationController {
 
     private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
-    @Autowired
-    @Qualifier("userValidator")
-    private UserValidator userValidator;
 
     @Autowired
     private UserService userService;
@@ -43,17 +38,17 @@ public class RegistrationController {
         return mav;
     }
 
-    @RequestMapping(value = "/checkInputs", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE )
+    @RequestMapping(value = "/checkInputs", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
-    public  String checkInputs( @RequestParam(value="name", required=true) String name,
-                                             @RequestParam(value="email", required=true) String email) {
-        System.out.println("name="+name+" , email="+email);
+    public String checkInputs(@RequestParam(value = "name", required = true) String name,
+                              @RequestParam(value = "email", required = true) String email) {
+        System.out.println("name=" + name + " , email=" + email);
         logger.info("check email");
 
-        if(userService.findByEmail(email)!=null){
+        if (userService.findByEmail(email) != null) {
             return "wrongEmail";
         }
-        if(userService.findByName(name)!=null){
+        if (userService.findByName(name) != null) {
             return "wrongName";
         }
         return "success";
