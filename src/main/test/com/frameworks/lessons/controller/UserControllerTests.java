@@ -1,10 +1,6 @@
 package com.frameworks.lessons.controller;
 
-import com.frameworks.lessons.entity.Account;
-import com.frameworks.lessons.entity.User;
-import com.frameworks.lessons.model.Role;
 import com.frameworks.lessons.service.AccountService;
-import com.frameworks.lessons.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -19,9 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import java.util.List;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @ComponentScan("com.frameworks.lessons")

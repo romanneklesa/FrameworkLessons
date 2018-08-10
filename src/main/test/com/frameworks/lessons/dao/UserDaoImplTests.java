@@ -9,21 +9,25 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.io.Serializable;
+
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebSecurityConfig.class, AppConfig.class})
-
 public class UserDaoImplTests {
 
     @Mock
     private UserDao userDao;
+
+    @Mock
+    private SessionFactory sessionFactory;
 
     @Before
     public void setUp() {
@@ -35,13 +39,21 @@ public class UserDaoImplTests {
         User mockedUser = new User();
 
         mockedUser.setId(1);
-        mockedUser.setName("admin");
 
         when(userDao.getUser(1)).thenReturn(mockedUser);
-        User testName = userDao.getUser(1);
-        Assert.assertEquals(mockedUser, testName);
 
     }
+
+    @Test
+    public void testAddUser(){
+        User mockedUser = new User();
+        userDao.add(mockedUser);
+
+        int id = mockedUser.getId();
+        Assert.assertNotNull(id);
+
+    }
+
 
     @Test
     public void testSave(){
