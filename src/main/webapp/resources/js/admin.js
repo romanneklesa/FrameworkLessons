@@ -12,7 +12,7 @@ function getUsers() {
             var htmlDeleteButton = "";
             html += "<div id = 'amountBlock" + item.id + "'>" +
                 "<div>" +
-                "<select class = 'target amountSelects' id = 'selectAmountUser" + item.id +
+                "<select class = 'form-control target amountSelects' id = 'selectAmountUser" + item.id +
                 "' onmouseover = 'getAmount(" + item.id + ")'>" +
                 "<option>Select...</option>" +
                 "</select> </div> </div>";
@@ -30,7 +30,16 @@ function addUserOnClick() {
     var html = $("tbody").html();
     var htmlRole = "<div id = 'roleNewUser' onclick='onClickChangeRoleNewUser()'>USER</div>";
     html += "<tr id = 'trNewUser' role='row' class='even'><td>...</td>" + // id
-        "<td><input type='text' id='newUserNameInput'</td>" +             // new user name
+            "<td>";
+    html += "<div class='input-group' id = 'newUserNameInputDiv'>"+
+            "<span class='input-group-addon'><i class='glyphicon glyphicon-user'></i></span>" +  // new user name
+            "<input id='newUserNameInput' type='text' class='form-control' name='email' placeholder='Username'>" +
+            "</div><div>" +
+            "<div class='input-group'>" +
+            "<span class='input-group-addon'><i class='glyphicon glyphicon-lock'></i></span>" +
+            "<input id='password' type='password' class='form-control' placeholder='Password'>" +
+            "</div></div>";
+    html += "</td>" +
         "<td style='text-align: center'>0, 0, 0</td>" +                   // accounts
         "<td>" + htmlRole + "</td>" +                                     // role
         "<td><button type='button' class='btn btn-light' onclick='saveNewUser()'>Save</button></td></tr>";
@@ -39,10 +48,11 @@ function addUserOnClick() {
 
 function saveNewUser() {
     var userName = $("#newUserNameInput").val();
+    var pass = $("#password").val();
     var role = $("#roleNewUser").html();
     $("#trNewUser").remove();
     tableUsers.clear();
-    $.post("/adduser", {user_name: userName, role_name: role})
+    $.post("/adduser", {user_name: userName, pass: pass, role_name: role})
         .done(getUsers());
 }
 
@@ -94,10 +104,21 @@ function getAmount(userId) {
 
 function addEditAmountBlock(userId, amount) {
     if (!$('input').is("#amountInput" + userId)) {
-        $('#amountBlock' + userId).append("<input type='number' class='editAmountInputs' id='amountInput" + userId +
-            "' value='" + amount + "'>" +
-            "<button id='buttonSaveAmount" + userId + "' type='button' " +
-            "onclick='onClickSaveAmount(" + userId + ")'>Ok</button>");
+        var html = "<div class='input-group'>" +
+            "<span class='input-group-addon'><i class='glyphicon glyphicon-usd'></i></span>" +
+            "<input id='amountInput" + userId + "' type='number' value='" + amount +
+            "' class='form-control editAmountInputs' placeholder='Amount'>" +
+            "</div>" +
+            "<button id='buttonSaveAmount" + userId + "' type='button' class='btn btn-light' " +
+            "onclick='onClickSaveAmount(" + userId + ")'>Ok</button>";
+        //$('#amountBlock' + userId).append("<input type='number' class='editAmountInputs' id='amountInput" + userId +
+        //    "' value='" + amount + "'>" +
+        //    "<button id='buttonSaveAmount" + userId + "' type='button' " +
+        //    "onclick='onClickSaveAmount(" + userId + ")'>Ok</button>");
+        $('#amountBlock' + userId).append(html);
+    }
+    else {
+        $("#amountInput"+userId).val(amount);
     }
 }
 
@@ -105,7 +126,7 @@ function onClickSaveAmount(userId) {
     var curAccount = $("#selectAmountUser" + userId + " option:selected").val();
     var amount = $("#amountInput" + userId).val();
     var html = "<div>" +
-        "<select class = 'target' id = 'selectAmountUser" + userId +
+        "<select class = 'target form-control amountSelects' id = 'selectAmountUser" + userId +
         "' onmouseover = 'getAmount(" + userId + ")'>" +
         "<option>Select...</option>" +
         "</select>" +
