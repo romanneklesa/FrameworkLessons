@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class RegistrationControllerTest {
@@ -74,7 +75,7 @@ public class RegistrationControllerTest {
 //checks whem email and name are valid
 
         MvcResult result3 = mockMvc.perform(post("/checkInputs")
-                .param("name", "anna")
+                .param("name", "anna123")
                 .param("email", "test2@gmail.com"))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -82,11 +83,15 @@ public class RegistrationControllerTest {
         String content3 = result3.getResponse().getContentAsString();
         assertTrue(content3.matches("success"));
 
-
     }
 
     @Test
-    public void createNewUserTest(){
+    public void createNewUserTest() throws Exception {
+        mockMvc.perform(post("/registration")
+                .param("name", "anna123")
+                .param("email", "test2@gmail.com")
+                .param("password", "anna123"))
+                .andExpect(redirectedUrl("/login.html"));
 
     }
 
