@@ -11,14 +11,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.MultiValueMap;
-
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class RegistrationControllerTest {
 
@@ -29,6 +26,8 @@ public class RegistrationControllerTest {
     private RegistrationController registrationController;
 
     private MockMvc mockMvc;
+    User testUser;
+
 
     @Before
     public void setup() {
@@ -39,6 +38,7 @@ public class RegistrationControllerTest {
     @Test
     public void checkInputsTest() throws Exception {
         User testUser = new User();
+
         testUser.setId(3);
         testUser.setName("lilly");
         testUser.setRole(Role.USER);
@@ -74,14 +74,24 @@ public class RegistrationControllerTest {
 //checks whem email and name are valid
 
         MvcResult result3 = mockMvc.perform(post("/checkInputs")
-                .param("name", "anna")
+                .param("name", "anna123")
                 .param("email", "test2@gmail.com"))
                 .andExpect(status().isOk())
                 .andReturn();
 
         String content3 = result3.getResponse().getContentAsString();
         assertTrue(content3.matches("success"));
+    }
 
+    @Test
+    public void createNewUserTest() throws Exception {
+        mockMvc.perform(post("/registration")
+                .param("name", "anna123")
+                .param("email", "test2@gmail.com")
+                .param("password", "anna123"))
+                .andExpect(redirectedUrl("/login.html"));
 
     }
+
 }
+
