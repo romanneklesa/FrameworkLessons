@@ -41,16 +41,20 @@ public class RegistrationControllerTest extends TestBase {
     @Test
     public void checkWrongEmailTest() throws Exception {
         when(userService.findByEmail("lilly@gmail.com")).thenReturn(testUser);
+
         logger.info("Checks case when email already in use ");
-        assertTrue(PostMockObject("lilly", "lilly@gmail.com").matches("wrongEmail"));
+        assertTrue(PostMockObject("lilly", "lilly@gmail.com")
+                .matches("wrongEmail"));
     }
 
     @Test
     public void checkWrongNameTest() throws Exception {
         testUser.setEmail("test@gmail.com");
         when(userService.findByName("lilly")).thenReturn(testUser);
+
         logger.info("Checks case when name already in use");
-        assertTrue(PostMockObject("lilly", "test@gmail.com").matches("wrongName"));
+        assertTrue(PostMockObject("lilly", "test@gmail.com")
+                .matches("wrongName"));
     }
 
     @Test
