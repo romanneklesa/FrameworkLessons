@@ -44,12 +44,6 @@ public class RegistrationControllerTest {
         testUser.setRole(Role.USER);
         testUser.setEmail("lilly@gmail.com");
 
-    }
-
-    @Test
-    public void checkInputsTest() throws Exception {
-
-
         when(userService.findByEmail("lilly@gmail.com")).thenReturn(testUser);
 
 //Chechs post request
