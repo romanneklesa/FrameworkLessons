@@ -71,11 +71,11 @@ function deleteUser(userId) {
 }
 
 function onClickChangeRole(userId) {
-    var curRole = $("#role" + userId).html();
+    var curRole = $("#role" + userId).text();
     if (curRole === "USER") curRole = "ADMIN";
     else curRole = "USER";
     $("#role" + userId).html(curRole);
-    $.post("/updateuserrole", {user_id: userId, role_name: "ADMIN"});
+    $.post("/updateuserrole", {user_id: userId, role_name: curRole});
 }
 
 function attachChangeAccountEvent() {
