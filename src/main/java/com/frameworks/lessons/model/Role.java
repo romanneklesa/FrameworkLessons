@@ -1,5 +1,5 @@
 package com.frameworks.lessons.model;
 
-public enum Role {
+public enum  Role {
     USER, ADMIN;
 }
