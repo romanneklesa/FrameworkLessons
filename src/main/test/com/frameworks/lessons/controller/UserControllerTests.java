@@ -1,62 +1,45 @@
 package com.frameworks.lessons.controller;
 
-import com.frameworks.lessons.service.AccountService;
+import com.frameworks.lessons.base.TestBase;
+import com.frameworks.lessons.config.TestConfigClass;
+import com.frameworks.lessons.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@ComponentScan("com.frameworks.lessons")
-public class UserControllerTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestConfigClass.class})
+public class UserControllerTests extends TestBase{
+
+    private MockMvc mvc;
 
     @InjectMocks
-    private UserController userController;
-
-    @Mock
-    private AccountService accountService;
-
-    private MockMvc mockMvc;
+    UserController controller;
 
     @Before
-    public void setup() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/pages/");
-        resolver.setSuffix(".jsp");
-
-        MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(userController, accountService)
-                .setViewResolvers(resolver).build();
+    public void init() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/pages/");
+        viewResolver.setSuffix(".jsp");
+        this.mvc = MockMvcBuilders.standaloneSetup(controller).setViewResolvers(viewResolver).build();
     }
 
     @Test
     public void testUserPage() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/user"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("user"))
-                .andDo(print())
-                .andReturn();
-    }
-
-    @Test
-    public void testCurrentuseraccounts() throws Exception {
-
-
-    }
-
-    @Test
-    public void testUpdateAmount(){
-
+        logger.info("Ckeck that status 200 and name='user'");
+        mvc.perform(get("/user")).andExpect(status().isOk())
+                .andExpect(view().name("user"));
     }
 }
