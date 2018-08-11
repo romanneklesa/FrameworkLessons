@@ -1,19 +1,39 @@
 .container {
-    width: 430px;
+    width: 600px;
     position: absolute;
     left: 50%;
-    margin-left: -200px;
+    margin-left: -300px;
 }
-
-.text-primary{
+.row {
+    width: 600px !important;
+}
+.text-primary {
     text-align: center;
 }
-
 #addUser {
     margin-right: 100px;
     margin-bottom: 50px;
 }
-
 #logout {
     margin-bottom: 50px;
+}
+.editAmountInputs {
+    width: 90px !important;
+    margin-right: 10px;
+}
+.amountSelects {
+    width: 180px !important;
+    margin-bottom: 10px;
+}
+#newUserNameInputDiv {
+    margin-bottom: 10px;
+}
+#newUserNameInput {
+    width: 110px;
+}
+#password {
+    width: 110px;
+}
+#tableUsers {
+    margin-top: 10px;
 }

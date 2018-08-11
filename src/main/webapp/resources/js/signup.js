@@ -6,7 +6,7 @@ $(document).ready(function () {
 });
 
 function validateBeforeSubmit(name, email) {
-    return email_validate(email) && checkPass()&& name.length>4;
+    return email_validate(email) && checkPass()&& Validate(name);
 
 }
 
@@ -23,12 +23,12 @@ function  beforeSubmit() {
             }
 
             if(data=='wrongEmail'){
-                document.getElementById("status").innerHTML = "<span class='warning'>Such email already exists</span>";
+                document.getElementById("status").innerHTML = "<span class='errorDescription'>Such email already exists</span>";
                 return false;
             }
 
             if(data=='wrongName'){
-                document.getElementById("nameValid").innerHTML = "<span class='warning'>Such name already exists</span>";
+                document.getElementById("nameValid").innerHTML = "<span class='errorDescription'>Such name already exists</span>";
                 return false;
             }
         });
@@ -48,7 +48,15 @@ function checkPass() {
     var badColor = "#ff6666";
     //Compare the values in the password field
     //and the confirmation field
+
+    if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test(pass1.value))){
+        message.style.color = badColor;
+        message.innerHTML = "Password must contain latin characters, digits, underscores (_) and minus(-) symbols only";
+        return false;
+    }
+
     if(pass1.value.length<4){
+        message.style.color = badColor;
         message.innerHTML = "Password is too short";
         pass1.focus();
     return false;
@@ -75,22 +83,29 @@ function checkPass() {
 
 // validates text only
 function Validate(txt) {
-    txt.value = txt.value.replace(/[^a-zA-Z-'\n\r.]+/g, '');
-    if(txt.value.length>4){
-        document.getElementById("nameValid").innerHTML = "<span class='valid'>Name is OK</span>"
+    if(!(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/.test(txt.value))){
+        document.getElementById("nameValid").innerHTML =
+            "<span class='errorDescription'> Login must contain latin characters, digits, underscores (_) and minus(-) symbols only</span>";
         document.getElementById("nameValid").focus();
-    } else {
-        document.getElementById("nameValid").innerHTML = "<span class='warning'>Name is too short</span>";
-    }
+        return false;
+    } else document.getElementById("nameValid").innerHTML ="<span></span>";
+
+    if (txt.length > 12 && txt.length < 5) {
+        document.getElementById("nameValid").innerHTML = "<span class='errorDescription'>Login length have to be from 5 to 12 symbols</span>";
+        document.getElementById("nameValid").focus();
+        return false;
+    } else document.getElementById("nameValid").innerHTML ="<span></span>";
+    return true;
 
 }
 
 // validate email
 function email_validate(email) {
-    var regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
+//    var regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (regMail.test(email) == false) {
-        document.getElementById("status").innerHTML = "<span class='warning'>Email address is not valid yet.</span>";
+    if (!re.test(String(email).toLowerCase())) {
+        document.getElementById("status").innerHTML = "<span class='errorDescription'>Email address is not valid yet.</span>";
         return false
     }
     else {

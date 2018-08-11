@@ -18,24 +18,26 @@ function run(parent){
 
 }
 
-function saveValue(elementId)
-{
+function saveValue(elementId) {
     /*поулчаем текущее значение*/
     var current_value = $("#" + elementId).val();
 
     /*получаем аккаунт пользователя из входящего параметр tmp_1 => 1*/
-    var current_user_id =  elementId.replace(/[^0-9]/gi, '');
+    var current_user_id = elementId.replace(/[^0-9]/gi, '');
 
     /*отправляем данные для сохранения на сервер*/
-    $.post("/updateamount", {account_id:current_user_id, amount:current_value})
 
-        /*если данные дошли до сервера, то меняем input=text обратно на label*/
-        .done(function( data ) {
-        $("#" + elementId).parent().html('<label class="text-primary col-sm-2">'  + current_value + '</label>');
+    if(/^[0-9]+$/.test(current_value)){
+    $.post("/updateamount", {account_id: current_user_id, amount: current_value})
 
-        /*запускаем переустановку событий на элементы (наше событие слетело вместе с уделаением/добавлением элемента)*/
-        setBind();
-    });
+    /*если данные дошли до сервера, то меняем input=text обратно на label*/
+        .done(function (data) {
+            $("#" + elementId).parent().html('<label class="text-primary col-sm-2">' + current_value + '</label>');
+
+            /*запускаем переустановку событий на элементы (наше событие слетело вместе с уделаением/добавлением элемента)*/
+            setBind();
+        });
+} else alert("Only digits can be entered!");
 
 }
 
