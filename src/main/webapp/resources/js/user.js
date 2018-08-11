@@ -44,7 +44,7 @@ function saveValue(elementId) {
 function setBind()
 {
     /*ставив событие, которое сработает при click*/
-    $( ".form-group label.col-sm-2").on( "click", function() {
+    $( ".text-primary").on( "click", function() {
 
         /*получаем текущее значение*/
          var current_value = $(this).html();
