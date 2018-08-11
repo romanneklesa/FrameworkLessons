@@ -62,6 +62,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void delete(User user) {
+        List<Account> accountList = accountDao.getAccountsByUserId(user.getId());
+        for(Account ac : accountList){
+            accountDao.deleteAccount(ac.getId());
+        }
         dao.deleteUser(user.getId());
     }
 
