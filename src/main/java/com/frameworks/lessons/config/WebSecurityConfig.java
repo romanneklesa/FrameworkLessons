@@ -2,6 +2,7 @@ package com.frameworks.lessons.config;
 
 import com.frameworks.lessons.dao.UserDao;
 
+import com.frameworks.lessons.filter.CashFilter;
 import com.frameworks.lessons.service.UserService;
 import com.frameworks.lessons.service.impl.UserDetailsServiceImpl;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -61,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/checkInputs", "/registration","/login").permitAll()
                 .antMatchers("/admin/**","/getusers","/deleteuser","/updateaccount","/updateuserrole").hasRole("ADMIN")
-                .anyRequest().authenticated();
+                .anyRequest().authenticated().and().addFilterBefore(new CashFilter(), UsernamePasswordAuthenticationFilter.class);
 
         http.formLogin()
                 .defaultSuccessUrl("/success")
