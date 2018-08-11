@@ -3,7 +3,8 @@ package com.frameworks.lessons.entity;
 import com.frameworks.lessons.model.Role;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
+
 
 @Entity
 @Table(name = "user")
@@ -13,6 +14,10 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+//    @OneToMany(cascade = CascadeType.REMOVE,mappedBy = "userId")
+//    @JoinTable(name = "user", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = { @JoinColumn(name = "userId") })
+//    private List<Account> accounts;
 
     @Column(name = "name", unique = true)
     private String name;

@@ -39,11 +39,32 @@ public class AdminController {
         return userService.listUsers();
     }
 
+    @PostMapping(value = "/adduser", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
+    @ResponseBody
+    public boolean addNewUser(@RequestParam("user_name") String user_name, @RequestParam("pass") String pass, @RequestParam("role_name") String role) {
+        try {
+            User user = new User();
+            user.setRole(Role.valueOf(role));
+            user.setPassword(pass);
+            user.setName(user_name);
+            user.setEmail("test@gmail.com");
+            userService.add(user);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     @PostMapping(value = "/deleteuser", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
     @ResponseBody
-    public boolean deleteUser(@RequestParam("user_id") String user_id) {
+    public boolean deleteUser(@RequestParam("user_id") int user_id) {
+        System.out.println(user_id);
         try {
-            userService.delete(userService.findById(Integer.parseInt(user_id)));
+            User user = userService.findById(user_id);
+
+            System.out.println(user.toString());
+
+            userService.delete(user);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
