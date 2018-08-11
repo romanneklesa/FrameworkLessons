@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.io.UnsupportedEncodingException;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -39,49 +41,23 @@ public class RegistrationControllerTest extends TestBase {
     @Test
     public void checkWrongEmailTest() throws Exception {
         when(userService.findByEmail("lilly@gmail.com")).thenReturn(testUser);
-
-        MvcResult result = mockMvc.perform(post("/checkInputs")
-                .param("name", "lilly")
-                .param("email", "lilly@gmail.com"))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String content = result.getResponse().getContentAsString();
-
         logger.info("Checks case when email already in use ");
-        assertTrue(content.matches("wrongEmail"));
+        assertTrue(PostMockObject("lilly", "lilly@gmail.com").matches("wrongEmail"));
     }
 
     @Test
     public void checkWrongNameTest() throws Exception {
-
         testUser.setEmail("test@gmail.com");
         when(userService.findByName("lilly")).thenReturn(testUser);
-
-        MvcResult result2 = mockMvc.perform(post("/checkInputs")
-                .param("name", "lilly")
-                .param("email", "test@gmail.com"))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String content2 = result2.getResponse().getContentAsString();
-
         logger.info("Checks case when name already in use");
-        assertTrue(content2.matches("wrongName"));
+        assertTrue(PostMockObject("lilly", "test@gmail.com").matches("wrongName"));
     }
 
     @Test
     public void checkSuccessTest() throws Exception {
-        MvcResult result3 = mockMvc.perform(post("/checkInputs")
-                .param("name", "anna123")
-                .param("email", "test2@gmail.com"))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String content3 = result3.getResponse().getContentAsString();
-
         logger.info("checks when email and name are valid");
-        assertTrue(content3.matches("success"));
+        assertTrue(PostMockObject("anna123", "test2@gmail.com")
+                .matches("success"));
     }
 
     @Test
@@ -92,6 +68,14 @@ public class RegistrationControllerTest extends TestBase {
                 .param("email", "test2@gmail.com")
                 .param("password", "anna123"))
                 .andExpect(redirectedUrl("/login.html"));
+    }
+
+    private String PostMockObject(String lilly, String s) throws Exception {
+        return mockMvc.perform(post("/checkInputs")
+                .param("name", lilly)
+                .param("email", s))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
     }
 }
 
