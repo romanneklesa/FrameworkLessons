@@ -47,8 +47,8 @@ public class AdminController {
             user.setRole(Role.valueOf(role));
             user.setPassword(pass);
             user.setName(user_name);
-            user.setEmail("test@gmail.com");
-            userService.add(user);
+            user.setEmail("test."+user_name+"@gmail.com");
+            userService.save(user);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
