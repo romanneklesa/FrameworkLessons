@@ -1,5 +1,6 @@
 package com.frameworks.lessons.controller;
 
+import com.frameworks.lessons.base.TestBase;
 import com.frameworks.lessons.config.TestConfigClass;
 import com.frameworks.lessons.service.UserService;
 import org.junit.Before;
@@ -20,20 +21,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestConfigClass.class})
-public class UserControllerTests {
+public class UserControllerTests extends TestBase{
 
     private MockMvc mvc;
 
     @InjectMocks
     UserController controller;
 
-    @Mock
-    UserService service;
-
-
     @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
+    public void init() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
@@ -42,6 +38,7 @@ public class UserControllerTests {
 
     @Test
     public void testUserPage() throws Exception {
+        logger.info("Ckeck that status 200 and name='user'");
         mvc.perform(get("/user")).andExpect(status().isOk())
                 .andExpect(view().name("user"));
     }
