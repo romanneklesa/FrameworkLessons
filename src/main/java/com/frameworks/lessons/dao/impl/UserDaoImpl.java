@@ -20,6 +20,7 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Deprecated
     @Override
     public void add(User user) {
         sessionFactory.getCurrentSession().save(user);
