@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -27,23 +26,29 @@ public class RegistrationControllerTest {
     private RegistrationController registrationController;
 
     private MockMvc mockMvc;
-
     User testUser;
+
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(registrationController).build();
-
-        testUser = new User();
-        testUser.setId(3);
-        testUser.setName("lilly");
-        testUser.setRole(Role.USER);
-        testUser.setEmail("lilly@gmail.com");
     }
 
     @Test
     public void checkInputsTest() throws Exception {
+        User testUser = new User();
+
+        testUser.setId(3);
+        testUser.setName("lilly");
+        testUser.setRole(Role.USER);
+        testUser.setEmail("lilly@gmail.com");
+
+    }
+
+    @Test
+    public void checkInputsTest() throws Exception {
+
 
         when(userService.findByEmail("lilly@gmail.com")).thenReturn(testUser);
 
@@ -82,7 +87,6 @@ public class RegistrationControllerTest {
 
         String content3 = result3.getResponse().getContentAsString();
         assertTrue(content3.matches("success"));
-
     }
 
     @Test
@@ -96,3 +100,4 @@ public class RegistrationControllerTest {
     }
 
 }
+
