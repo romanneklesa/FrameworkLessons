@@ -11,8 +11,6 @@ public interface AccountService {
 	void add(Account account);
 	void update(Account account);
 	void delete(Account account);
-
-	List<Account> listAccounts();
 	List<Account> getAccountsByUserId(int userId);
 	
 }

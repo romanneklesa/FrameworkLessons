@@ -1,7 +1,9 @@
 package com.frameworks.lessons.configuration;
 
 import com.frameworks.lessons.dao.AccountDao;
+import com.frameworks.lessons.dao.UserDao;
 import com.frameworks.lessons.dao.impl.AccountDaoImpl;
+import com.frameworks.lessons.dao.impl.UserDaoImpl;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -44,6 +46,17 @@ public class BaseConfig {
 
         }
         return new AccountDaoImpl();
+    }
+
+    @Bean(name = "userDao")
+    public UserDao getUserDao(){
+        UserDao userDao = new UserDaoImpl();
+        try {
+            ReflectionTestUtils.setField(userDao, "sessionFactory", getSessionFactory());
+        } catch (Exception e) {
+
+        }
+        return new UserDaoImpl();
     }
 
     @Bean

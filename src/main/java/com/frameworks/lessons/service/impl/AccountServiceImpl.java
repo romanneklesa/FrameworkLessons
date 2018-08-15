@@ -1,15 +1,13 @@
 package com.frameworks.lessons.service.impl;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.frameworks.lessons.dao.AccountDao;
+import com.frameworks.lessons.entity.Account;
+import com.frameworks.lessons.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.frameworks.lessons.dao.AccountDao;
-import com.frameworks.lessons.entity.Account;
-import com.frameworks.lessons.service.AccountService;
+import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -39,12 +37,6 @@ public class AccountServiceImpl implements AccountService {
 	@Transactional
 	public void delete(Account account) {
 		dao.deleteAccount(account.getId());
-	}
-
-	@Override
-	@Transactional(readOnly=true)
-	public List<Account> listAccounts() {
-		return dao.listAccounts();
 	}
 
 	@Override

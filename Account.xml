@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-	<user user_id="1" name="Linda123"  email="Linda123@gmail.com" password="$2a$10$fZrodvAOoHE.wRHqmZrDAeCC.q64eePR2KxpiFLAXlG.z4fI5OMN2" role="USER" />
-    <account id="1" amount="1234"  userId="1"/>
-    <account id="2" amount="12" userId="1" />
-</dataset>
