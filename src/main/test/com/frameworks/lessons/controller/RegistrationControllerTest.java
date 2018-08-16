@@ -8,10 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.io.UnsupportedEncodingException;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
