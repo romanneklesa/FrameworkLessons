@@ -1,5 +1,7 @@
-package com.frameworks.lessons.config;
+package unitTests.com.frameworks.lessons.config;
 
+import com.frameworks.lessons.config.WebMvcConfig;
+import com.frameworks.lessons.config.WebSecurityConfig;
 import com.frameworks.lessons.controller.UserController;
 import com.frameworks.lessons.dao.UserDao;
 import com.frameworks.lessons.service.AccountService;

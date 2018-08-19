@@ -1,7 +1,8 @@
-package com.frameworks.lessons.dao;
+package unitTests.com.frameworks.lessons.dao;
 
 import com.frameworks.lessons.config.AppConfig;
 import com.frameworks.lessons.config.WebSecurityConfig;
+import com.frameworks.lessons.dao.UserDao;
 import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.model.Role;
 import org.hibernate.SessionFactory;

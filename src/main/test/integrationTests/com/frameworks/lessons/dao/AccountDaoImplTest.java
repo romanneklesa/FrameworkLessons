@@ -1,4 +1,4 @@
-package com.frameworks.lessons.dao;
+package integrationTests.com.frameworks.lessons.dao;
 
 import com.frameworks.lessons.entity.Account;
 import com.frameworks.lessons.entity.User;

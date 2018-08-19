@@ -1,6 +1,6 @@
-package com.frameworks.lessons.controller;
+package unitTests.com.frameworks.lessons.controller;
 
-import com.frameworks.lessons.base.TestBase;
+import com.frameworks.lessons.controller.RegistrationController;
 import com.frameworks.lessons.entity.User;
 import com.frameworks.lessons.model.Role;
 import com.frameworks.lessons.service.UserService;
@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import unitTests.com.frameworks.lessons.base.TestBase;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
