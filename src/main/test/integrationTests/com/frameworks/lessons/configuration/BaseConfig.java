@@ -1,4 +1,4 @@
-package com.frameworks.lessons.configuration;
+package integrationTests.com.frameworks.lessons.configuration;
 
 import com.frameworks.lessons.dao.AccountDao;
 import com.frameworks.lessons.dao.UserDao;

@@ -1,4 +1,4 @@
-package com.frameworks.lessons.base;
+package unitTests.com.frameworks.lessons.base;
 
 import com.frameworks.lessons.dao.impl.AccountDaoImpl;
 import org.junit.After;

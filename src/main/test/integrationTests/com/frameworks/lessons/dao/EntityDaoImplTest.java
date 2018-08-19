@@ -1,6 +1,8 @@
-package com.frameworks.lessons.dao;
+package integrationTests.com.frameworks.lessons.dao;
 
-import com.frameworks.lessons.configuration.BaseConfig;
+import com.frameworks.lessons.dao.AccountDao;
+import com.frameworks.lessons.dao.UserDao;
+import integrationTests.com.frameworks.lessons.configuration.BaseConfig;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
